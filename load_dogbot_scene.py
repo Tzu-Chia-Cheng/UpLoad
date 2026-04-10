@@ -15,7 +15,8 @@ from isaacsim.core.api.robots import Robot
 class Go2Sim():
     def __init__(self):   
         # initial settings
-        self.timeline = omni.timeline.get_timeline_interface().set_auto_update(True)
+        self.timeline = omni.timeline.get_timeline_interface()
+        self.timeline.set_auto_update(True)
         self.world = World(physics_dt = 0.002, rendering_dt = 0.025, stage_units_in_meters=1)
         self.world.add_physics_callback("callback_control", callback_fn=self.callback)
         
