@@ -3,6 +3,7 @@ import time
 import numpy as np
 from isaacsim import SimulationApp
 simulation_app = SimulationApp({"headless": False})
+
 from isaacsim.core.utils.stage import add_reference_to_stage
 from isaacsim.core.api import World
 from isaacsim.core.api.robots import Robot
@@ -45,9 +46,8 @@ class Go2Sim():
             
             #check if delay is needed or not
             end = time.time()
-            if (end - start < 1/self.sim_loop_freq):
-                time.sleep(1/self.sim_loop_freq - (end - start))
-            print("Finish 1 render")
+            
+            print(end - start)
 
         # Cleanup
         self.timeline.stop()
