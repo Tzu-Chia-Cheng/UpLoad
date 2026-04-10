@@ -48,9 +48,9 @@ class Go2Sim():
             end = time.time()
             if (end - start < 1/self.sim_loop_freq):
                 time.sleep(1/self.sim_loop_freq - (end - start))
+            print("Finish 1 render")
 
         # Cleanup
-        print("Finish 1 render")
         self.timeline.stop()
         simulation_app.close()
 
