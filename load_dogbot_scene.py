@@ -4,7 +4,7 @@ import numpy as np
 from omni.isaac.kit import SimulationApp
 simulation_app = SimulationApp({"headless": False})
 from omni.isaac.core.utils.stage import add_reference_to_stage
-from omni.isaac.core import World
+from isaacsim.core.api import World
 from omni.isaac.core.robots import Robot
 import omni.kit.commands
 
@@ -12,7 +12,7 @@ class Go2Sim():
     def __init__(self):   
         # initial settings
         self.timeline = omni.timeline.get_timeline_interface()
-        self.world = World(physics_dt = 0.001, rendering_dt = 0.025, stage_units_in_meters=1)
+        self.world = World(physics_dt = 0.002, rendering_dt = 0.025, stage_units_in_meters=1)
         self.world.add_physics_callback("callback_control", callback_fn=self.callback)
         
         # add surface and robot dog
