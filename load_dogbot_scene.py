@@ -48,7 +48,7 @@ class DogBotSim():
         #setup control articulation
         self.target_action = ArticulationAction()
 
-        self.sim_loop_freq = 100
+        self.sim_loop_freq = 1000
 
     def run_simulation(self):
         self.world.reset()
@@ -64,6 +64,7 @@ class DogBotSim():
             
             #check if delay is needed or not
             end = time.time()
+            print( end - start )
             if (end - start < 1/self.sim_loop_freq):
                 time.sleep(1/self.sim_loop_freq - (end - start))
 
