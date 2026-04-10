@@ -24,7 +24,7 @@ class DogBotSim():
 
         # initial settings
         self.timeline = omni.timeline.get_timeline_interface()
-        self.world = World(physics_dt = 0.0025, rendering_dt = 0.01, stage_units_in_meters=1)
+        self.world = World(physics_dt = 0.001, rendering_dt = 0.001, stage_units_in_meters=1)
 
         # add surface and robot dog
         self.world.scene.add_default_ground_plane()
