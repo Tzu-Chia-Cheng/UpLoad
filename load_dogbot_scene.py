@@ -2,7 +2,11 @@ import omni
 import time
 import numpy as np
 from isaacsim import SimulationApp
-simulation_app = SimulationApp({"headless": False})
+simulation_app = SimulationApp({
+    "headless": False,
+    "sync_loads": True,
+    "active_config": "default"
+})
 
 from isaacsim.core.utils.stage import add_reference_to_stage
 from isaacsim.core.api import World
