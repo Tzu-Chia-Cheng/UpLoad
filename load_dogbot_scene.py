@@ -2,16 +2,14 @@ import omni
 import time
 import numpy as np
 from omni.isaac.kit import SimulationApp
+simulation_app = SimulationApp({"headless": False})
 from omni.isaac.core.utils.stage import add_reference_to_stage
 from omni.isaac.core import World
 from omni.isaac.core.robots import Robot
 import omni.kit.commands
 
 class Go2Sim():
-    def __init__(self):
-
-        self.simulation_app = SimulationApp({"headless": False})
-        
+    def __init__(self):   
         # initial settings
         self.timeline = omni.timeline.get_timeline_interface()
         self.world = World(physics_dt = 0.001, rendering_dt = 0.01, stage_units_in_meters=1)
@@ -40,7 +38,7 @@ class Go2Sim():
     
         self.Go2.set_joint_positions(np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]))
     
-        while self.simulation_app.is_running():
+        while simulation_app.is_running():
             start = time.time()
 
             #update simulation step
@@ -54,7 +52,7 @@ class Go2Sim():
 
         # Cleanup
         self.timeline.stop()
-        self.simulation_app.close()
+        simulation_app.close()
 
 if __name__ == '__main__':
     go2_sim = Go2Sim()
