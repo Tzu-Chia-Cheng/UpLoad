@@ -27,8 +27,6 @@ class Go2Sim():
         #reset the world to default, ***SENSOR HAVE TO DECLARE BEFORE IT!!!***
         self.world.reset()
 
-        self.sim_loop_freq = 40
-
     def callback(self, step_size):
         print(1)
 
@@ -37,17 +35,16 @@ class Go2Sim():
         self.timeline.play()
     
         self.Go2.set_joint_positions(np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]))
-    
+        start = 0
+        end = 0
         while simulation_app.is_running():
+            end = start
             start = time.time()
-
+            print(start - end)
             #update simulation step
             self.world.step(render=True)
             
-            #check if delay is needed or not
-            end = time.time()
-            
-            print(end - start)
+            #check if delay is needed or not            
 
         # Cleanup
         self.timeline.stop()
