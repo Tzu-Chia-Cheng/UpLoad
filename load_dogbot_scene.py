@@ -29,7 +29,7 @@ class Go2Sim():
 
         self.sim_loop_freq = 100
 
-    def callback(self):
+    def callback(self, step_size):
         print(1)
 
     def run_simulation(self):
@@ -46,11 +46,11 @@ class Go2Sim():
             
             #check if delay is needed or not
             end = time.time()
-            print( end - start )
             if (end - start < 1/self.sim_loop_freq):
                 time.sleep(1/self.sim_loop_freq - (end - start))
 
         # Cleanup
+        print("Finish 1 render")
         self.timeline.stop()
         simulation_app.close()
 
