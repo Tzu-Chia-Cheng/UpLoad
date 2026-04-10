@@ -12,7 +12,7 @@ class Go2Sim():
     def __init__(self):   
         # initial settings
         self.timeline = omni.timeline.get_timeline_interface()
-        self.world = World(physics_dt = 0.001, rendering_dt = 0.01, stage_units_in_meters=1)
+        self.world = World(physics_dt = 0.001, rendering_dt = 0.025, stage_units_in_meters=1)
         self.world.add_physics_callback("callback_control", callback_fn=self.callback)
         
         # add surface and robot dog
@@ -27,7 +27,7 @@ class Go2Sim():
         #reset the world to default, ***SENSOR HAVE TO DECLARE BEFORE IT!!!***
         self.world.reset()
 
-        self.sim_loop_freq = 100
+        self.sim_loop_freq = 40
 
     def callback(self, step_size):
         print(1)
