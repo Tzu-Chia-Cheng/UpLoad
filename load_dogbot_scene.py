@@ -1,12 +1,11 @@
 import omni
 import time
 import numpy as np
-from omni.isaac.kit import SimulationApp
+from isaacsim import SimulationApp
 simulation_app = SimulationApp({"headless": False})
-from omni.isaac.core.utils.stage import add_reference_to_stage
+from isaacsim.core.utils.stage import add_reference_to_stage
 from isaacsim.core.api import World
-from omni.isaac.core.robots import Robot
-import omni.kit.commands
+from isaacsim.core.api.robots import Robot
 
 class Go2Sim():
     def __init__(self):   
