@@ -19,7 +19,7 @@ from unitree_sdk2py_isaac_sim_bridge import CGo2IsaacSimBridge
 import threading
 
 from IsaacDataDef import CIsaacData
-import config
+import isaacsim_config as config
 
 IsaacData = CIsaacData()
 
