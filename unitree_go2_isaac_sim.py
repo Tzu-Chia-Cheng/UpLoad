@@ -56,6 +56,8 @@ class Go2Sim():
         # set up global variable
         global IsaacData
         
+        self.nPrintSensorDataCnt = 0
+
         # initialize dds channel
         self.locker = threading.Lock()
         ChannelFactoryInitialize( config.DOMAIN_ID, config.INTERFACE )
@@ -168,7 +170,40 @@ class Go2Sim():
         IsaacData.SensorData[ config.MOTOR_SENSOR_DIM + config.IMU_SENSOR_DIM + 2 ] = RLContactSensorData.value
         IsaacData.SensorData[ config.MOTOR_SENSOR_DIM + config.IMU_SENSOR_DIM + 3 ] = RRContactSensorData.value
 
-    def run_simulation(self):
+        if( config.PRINT_SENSOR_DATA == True ):
+            self.PrintSensorData()
+
+    def PrintSensorData( self ):
+        if( self.nPrintSensorDataCnt % 500 == 0 ):
+            nMotorNum = config.MOTOR_NUM_GO2
+            IMUStartIndex = config.MOTOR_SENSOR_DIM
+            ContactStartIndex = IMUStartIndex + config.IMU_SENSOR_DIM
+
+            print("="*50)
+            print(f"{'Robot Sensor Data Monitor':^50}")
+
+            # 1. 馬達數據 (角度, 速度, 扭矩)
+            print(f"\n[Motor Data] (Num: {nMotorNum})")
+            print(f"  Angle:  {IsaacData.SensorData[ 0 : nMotorNum ]}")
+            print(f"  Vel:    {IsaacData.SensorData[ nMotorNum : 2 * nMotorNum ]}")
+            print(f"  Effort: {IsaacData.SensorData[ 2 * nMotorNum : 3 * nMotorNum ]}")
+
+            # 2. IMU 數據
+            print(f"\n[IMU Data]")
+            print(f"  Orientation (Quat): {IsaacData.SensorData[ IMUStartIndex : IMUStartIndex + 4 ]}")
+            print(f"  Angular Vel:        {IsaacData.SensorData[ IMUStartIndex + 4 : IMUStartIndex + 7 ]}")
+            print(f"  Linear Acc:         {IsaacData.SensorData[ IMUStartIndex + 7 : IMUStartIndex + 10 ]}")
+
+            # 3. 足端接觸感測器 (Contact Sensors)
+            print(f"\n[Contact Sensors]")
+            szLabels = ["FL", "FR", "RL", "RR"]
+            ContactData = IsaacData.SensorData[ ContactStartIndex : ContactStartIndex + 4 ]
+            szContactData = " | ".join([f"{szLabels[ nFootSensorCnt ]}: {ContactData[ nFootSensorCnt ]:.2f}" for nFootSensorCnt in range(4)])
+            print(f"  {szContactData}")
+            
+        self.nPrintSensorDataCnt += 1
+    
+    def RunSimulation( self ):
         self.World.reset()
         self.Timeline.play()
         self.Go2.set_joint_positions( self.InitPos )
@@ -191,4 +226,4 @@ class Go2Sim():
 
 if __name__ == '__main__':
     go2_sim = Go2Sim()
-    go2_sim.run_simulation()
+    go2_sim.RunSimulation()
