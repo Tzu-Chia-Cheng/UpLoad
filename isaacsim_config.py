@@ -1,15 +1,15 @@
-ROBOT_SCENE = "D:\\10102127\\go2_description\\urdf\\go2_description\\go2_description.usd"
-ROBOT_PRIM_PATH = "/World/Go2"
-
 DOMAIN_ID = 1 # domain id
 INTERFACE = "lo" # interface
+TOPIC_LOWCMD = "rt/lowcmd"
+TOPIC_LOWSTATE = "rt/lowstate"
 
+ROBOT_SCENE = "D:\\10102127\\go2_description\\urdf\\go2_description\\go2_description.usd"
+ROBOT_PRIM_PATH = "/World/Go2"
 SIM_TIME_STEP = 0.02 # [sec]
 SIM_PHYSICS_DT = 0.001 # [sec]
 SIM_RENDER_DT = 0.02 # [sec]
-
-TOPIC_LOWCMD = "rt/lowcmd"
-TOPIC_LOWSTATE = "rt/lowstate"
+SIM_MOTOR_KP = 400
+SIM_MOTOR_KD = 10
 
 MOTOR_SENSOR_NUM = 3
 MOTOR_NUM_GO2 = 12
