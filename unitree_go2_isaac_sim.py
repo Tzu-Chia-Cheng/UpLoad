@@ -151,8 +151,8 @@ class Go2Sim():
         RRContactSensorData = self.RRContactSensorInterface.get_sensor_reading( "/World/Go2/RR_foot/ContactSensor", use_latest_data = True )
         
         IsaacData.SensorData[:config.MOTOR_NUM_GO2] = RecvMotorAng
-        IsaacData.SensorData[ config.MOTOR_NUM_GO2 : config.MOTOR_NUM_GO2 * 2 - 1 ] = RecvMotorVel
-        IsaacData.SensorData[ config.MOTOR_NUM_GO2 * 2 : config.MOTOR_NUM_GO2 * 3 - 1 ] = RecvMotorEffort
+        IsaacData.SensorData[ config.MOTOR_NUM_GO2 : config.MOTOR_NUM_GO2 * 2 ] = RecvMotorVel
+        IsaacData.SensorData[ config.MOTOR_NUM_GO2 * 2 : config.MOTOR_NUM_GO2 * 3 ] = RecvMotorEffort
         IsaacData.SensorData[ config.MOTOR_SENSOR_DIM + 0 ] = IMUData.orientation[0]
         IsaacData.SensorData[ config.MOTOR_SENSOR_DIM + 1 ] = IMUData.orientation[1]
         IsaacData.SensorData[ config.MOTOR_SENSOR_DIM + 2 ] = IMUData.orientation[2]
