@@ -124,7 +124,9 @@ class Go2Sim():
         self.TargetAction = ArticulationAction()
 
         # set up the motor gain Kp, Kd and target motor command
-        self.ArticulationController.set_gains( config.SIM_MOTOR_KP, config.SIM_MOTOR_KD )
+        zeros_kp = np.zeros( config.MOTOR_NUM_GO2 )
+        zeros_kd = np.zeros( config.MOTOR_NUM_GO2 )
+        self.ArticulationController.set_gains( zeros_kp, zeros_kd )
         self.MotorCmd = np.zeros( config.MOTOR_NUM_GO2 )
     
     def PhysicsCallback( self, step_size ):
